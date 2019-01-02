@@ -19,3 +19,6 @@ I've added one helper script in [bin/generate_static_content.sh](bin/generate_st
   - Use gsutil to upload your content to a bucket (make sure the bucket exists for your domain)
 
 In order to run it, make sure ghost is running with `docker-compose up` and then in another window do `docker-compose exec app /usr/local/bin/generate_static_content.sh`.
+
+## Hosting it
+As I mentioned above, I have a Google Cloud Storage bucket which all the static content goes into.  That's configured as a "website" for "karlstoney.com", I then use Cloudflare free to front this as a CDN.  And voilla, blog hosting for pennies per month.
