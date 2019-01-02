@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  app:
+    image: stono/ghost:latest
+    build: 
+      context: .
+      args:
+        GCLOUD_VERSION: 227.0.0
+        GHOST_VERSION: 2.9.1
+        SITEMAP_GENERATOR_VERSION: 0.0.11
+    restart: always
+    environment:
+      NODE_ENV: production
+    volumes:
+      - ./data/content:/var/www/ghost/current/content
+#      - ./static:/static
+      - ~/.config:/root/.config:ro
+    ports:
+      - 2368:2368

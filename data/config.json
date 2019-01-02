@@ -1,0 +1,30 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 2368
+  },
+  "url": "http://karlstoney.com",
+  "database": {
+      "client": "sqlite3",
+      "connection": {
+          "filename": "content/data/ghost.db"
+      },
+      "debug": false
+  },
+  "paths": {
+      "contentPath": "content/"
+  },
+  "privacy": {
+      "useRpcPing": false,
+      "useUpdateCheck": true
+  },
+  "useMinFiles": false,
+  "caching": {
+      "theme": {
+          "maxAge": 0
+      },
+      "admin": {
+          "maxAge": 0
+      }
+  }
+}
