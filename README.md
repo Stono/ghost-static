@@ -4,7 +4,7 @@ This is a dockerfile which allows you to build a site using the ghost blogging p
 It's pretty opinionated in that it:
 
   - Has disqus comments enabled
-  - Uses date url slugs (eg https://karlstoney.com/2018/07/07/managing-your-costs-on-kubernetes), although you can change this by editing [data/settings/routes.yaml](data/settings/routes.yaml).
+  - Uses date url slugs (eg https://karlstoney.com/2018/07/07/managing-your-costs-on-kubernetes), although you can change this by editing [data/content/settings/routes.yaml](routes.yaml).
   - Expects your domain to be hosted on https://
   - In order to use the gstuil upload to a gcs bucket, you have gcloud authenticated on your host machine 
   
