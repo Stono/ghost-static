@@ -16,6 +16,7 @@ services:
       - "karlstoney.com:127.0.0.1"
     environment:
       NODE_ENV: production
+      GHOST_DOMAIN: karlstoney.com
     volumes:
       - ./data/content/data:/var/www/ghost/current/content/data
       - ./data/content/images:/var/www/ghost/current/content/images
