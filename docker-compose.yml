@@ -13,8 +13,9 @@ services:
     environment:
       NODE_ENV: production
     volumes:
-      - ./data/content:/var/www/ghost/current/content
-#      - ./static:/static
+      - ./data/content/data:/var/www/ghost/current/content/data
+      - ./data/content/images:/var/www/ghost/current/content/images
+      - ./data/content/settings:/var/www/ghost/current/content/settings
       - ~/.config:/root/.config:ro
     ports:
       - 2368:2368
