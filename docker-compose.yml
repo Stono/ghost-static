@@ -3,6 +3,8 @@ version: '3.4'
 services:
   app:
     image: stono/ghost:latest
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=1
     build: 
       context: .
       args:
@@ -10,6 +12,8 @@ services:
         GHOST_VERSION: 2.9.1
         SITEMAP_GENERATOR_VERSION: 0.0.11
     restart: always
+    extra_hosts:
+      - "karlstoney.com:127.0.0.1"
     environment:
       NODE_ENV: production
     volumes:
@@ -18,4 +22,4 @@ services:
       - ./data/content/settings:/var/www/ghost/current/content/settings
       - ~/.config:/root/.config:ro
     ports:
-      - 2368:2368
+      - 80:80

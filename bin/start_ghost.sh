@@ -1,4 +1,5 @@
 #!/bin/bash
 set -e
-
-su -c 'cd $GHOST_HOME/current && npm start' www-data
+echo "options single-request" >> /etc/resolv.conf
+cd $GHOST_HOME/current
+npm start
