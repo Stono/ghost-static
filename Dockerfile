@@ -2,8 +2,12 @@ FROM centos:7
 MAINTAINER Karl Stoney <me@karlstoney.com>
 
 # Get dependencies
-RUN yum -y -q install which curl wget gettext patch gcc-c++ make git-core bzip2 unzip && \
+RUN yum -y -q install which curl wget gettext patch gcc-c++ make git-core bzip2 unzip gcc python-devel python-setuptools redhat-rpm-config && \
     yum -y -q clean all
+
+# Install crcmod
+RUN easy_install -U pip && \
+    pip install -U crcmod
 
 # Get nodejs repos
 RUN curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
