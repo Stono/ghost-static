@@ -1,11 +1,11 @@
 #!/bin/bash
-cd /tmp
-rm -rf static
-mkdir -p static/content
-cp -R $GHOST_HOME/current/content/images static/content/
+cd /static
+rm -rf *
+mkdir content
+cp -R $GHOST_HOME/current/content/images content/
 
 echo "Running gssg..."
-gssg --domain "http://$GHOST_DOMAIN" --dest static --url "https://$GHOST_DOMAIN"
+gssg --domain "http://127.0.0.1" --dest . --url "https://$GHOST_DOMAIN"
 echo "Static content generated!"
 echo "Uploading to gcs..."
-gsutil -m rsync -R static gs://$GHOST_DOMAIN
+gsutil -m rsync -R . gs://$GHOST_DOMAIN

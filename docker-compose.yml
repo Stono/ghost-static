@@ -10,10 +10,8 @@ services:
       args:
         GCLOUD_VERSION: 227.0.0
         GHOST_VERSION: 2.9.1
-        SITEMAP_GENERATOR_VERSION: 0.0.11
+        SITEMAP_GENERATOR_VERSION: 0.0.15
     restart: always
-    extra_hosts:
-      - "karlstoney.com:127.0.0.1"
     environment:
       NODE_ENV: production
       GHOST_DOMAIN: karlstoney.com
@@ -21,6 +19,8 @@ services:
       - ./data/content/data:/var/www/ghost/current/content/data
       - ./data/content/images:/var/www/ghost/current/content/images
       - ./data/content/settings:/var/www/ghost/current/content/settings
+      - ./bin:/usr/local/bin
       - ~/.config:/root/.config:ro
+      - ./data/static:/static
     ports:
       - 80:80
