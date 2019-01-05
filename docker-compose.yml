@@ -10,7 +10,7 @@ services:
       args:
         GCLOUD_VERSION: 227.0.0
         GHOST_VERSION: 2.9.1
-        SITEMAP_GENERATOR_VERSION: 0.1.0-1
+        SITEMAP_GENERATOR_VERSION: 0.1.0-4
     restart: always
     environment:
       NODE_ENV: production
