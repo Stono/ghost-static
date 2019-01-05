@@ -1,8 +1,8 @@
 #!/bin/bash
 cd /tmp
 rm -rf static
-#mkdir -p static/content
-#cp -R $GHOST_HOME/current/content/images static/content/
+mkdir -p static/content
+cp -R $GHOST_HOME/current/content/images static/content/
 
 echo "Running gssg..."
 gssg --domain "http://$GHOST_DOMAIN" --dest static --url "https://$GHOST_DOMAIN"
