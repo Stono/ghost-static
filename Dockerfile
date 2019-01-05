@@ -54,7 +54,7 @@ RUN su -c 'ghost install local --no-setup --db sqlite3 --v$GHOST_VERSION' www-da
 
 # Add static content generator
 ARG SITEMAP_GENERATOR_VERSION
-RUN npm install -g https://github.com/Stono/ghost-static-site-generator
+RUN npm install -g https://github.com/Fried-Chicken/ghost-static-site-generator
 #RUN npm install -g ghost-static-site-generator@$SITEMAP_GENERATOR_VERSION
 
 # Patch ghost
