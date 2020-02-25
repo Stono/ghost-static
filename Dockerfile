@@ -10,10 +10,10 @@ RUN easy_install -U pip && \
     pip install -U crcmod
 
 # Get nodejs repos
-RUN curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
+RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 
 # Install nodejs, max currently supported is 6.9.0
-RUN yum -y -q install nodejs-8.* && \
+RUN yum -y -q install nodejs-10.* && \
     yum -y -q clean all
 
 # Setup www-data user
