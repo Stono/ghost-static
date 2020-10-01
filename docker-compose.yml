@@ -8,8 +8,9 @@ services:
     build: 
       context: .
       args:
-        GCLOUD_VERSION: 264.0.0
-        GHOST_VERSION: 3.8.0
+        GCLOUD_VERSION: 306.0.0
+        GHOST_VERSION: 3.35.0
+        GHOST_CLI_VERSION: 1.14.1 
         SITEMAP_GENERATOR_VERSION: 1.0.1 
     restart: always
     environment:

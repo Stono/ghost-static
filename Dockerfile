@@ -10,10 +10,10 @@ RUN easy_install -U pip && \
     pip install -U crcmod
 
 # Get nodejs repos
-RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
+RUN curl --silent --location https://rpm.nodesource.com/setup_12.x | bash -
 
 # Install nodejs, max currently supported is 6.9.0
-RUN yum -y -q install nodejs-10.* && \
+RUN yum -y -q install nodejs-12.* && \
     yum -y -q clean all
 
 # Setup www-data user
@@ -51,7 +51,8 @@ CMD ["/usr/local/bin/start_ghost.sh"]
 
 # Install Ghost
 WORKDIR $GHOST_HOME
-RUN npm install -g ghost-cli@latest
+ARG GHOST_CLI_VERSION
+RUN npm install -g ghost-cli@$GHOST_CLI_VERSION
 RUN chown -R www-data:www-data $GHOST_HOME
 ARG GHOST_VERSION
 RUN su -c 'ghost install local --no-setup --db sqlite3 --v$GHOST_VERSION' www-data
@@ -67,4 +68,4 @@ COPY patches/ /usr/local/etc/ghost/patches/
 COPY bin/* /usr/local/bin/
 
 RUN /usr/local/bin/apply_patches.sh
-COPY data/config.json /var/www/ghost/current/core/server/config/env/config.production.json
+COPY data/config.json /var/www/ghost/current/config.production.json
