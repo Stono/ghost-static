@@ -9,7 +9,7 @@ gssg --domain "http://127.0.0.1" --dest . --url "https://$GHOST_DOMAIN"
 
 echo "Download all sizes of images"
 cd /static/content/images
-sizes=( "w600" "w1000" "w2000" )
+sizes=( "w600" "w1000" "w1600" "w2000" )
 
 function getImage() {
   file=$1
@@ -42,4 +42,4 @@ done
 echo "Static content generated!"
 echo "Uploading to gcs..."
 cd /static 
-gsutil -m rsync -d -c -R . gs://$GHOST_DOMAIN
+gsutil -h "Cache-Control:no-cache,max-age=0" -m rsync -d -c -R . gs://$GHOST_DOMAIN

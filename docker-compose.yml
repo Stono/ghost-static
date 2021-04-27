@@ -21,7 +21,7 @@ services:
       - ./data/content/images:/var/www/ghost/current/content/images
       - ./data/content/settings:/var/www/ghost/current/content/settings
       - ./bin:/usr/local/bin
-      - ~/.config:/root/.config:ro
+#      - ~/.config:/root/.config
       - ./data/static:/static
     ports:
       - 80:80
