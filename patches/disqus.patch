@@ -1,6 +1,6 @@
 --- versions/4.2.2/content/themes/casper/post.hbs
 +++ versions/4.2.2/content/themes/casper/post.hbs
-@@ -69,11 +69,17 @@
+@@ -69,11 +69,19 @@
          {{content}}
      </section>
  
@@ -9,6 +9,7 @@
 -        If you want to embed comments, this is a good place to paste your code!
 -    </section>
 -    --}}
++    <section class="article-comments gh-canvas">
 +    <div id="disqus_thread"></div>
 +    <script>
 +
@@ -20,6 +21,7 @@
 +    })();
 +    </script>
 +    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
++    </section>
  
  </article>
  
