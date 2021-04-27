@@ -1,24 +1,32 @@
---- content/themes/casper/post.hbs      2018-12-20 10:28:22.000000000 +0000
-+++ content/themes/casper/post.hbs      2019-01-02 14:02:54.166526000 +0000
-@@ -75,11 +75,17 @@
-
-             </footer>
-
--            {{!--
--            <section class="post-full-comments">
--                If you want to embed comments, this is a good place to do it!
--            </section>
--            --}}
-+      <div id="disqus_thread"></div>
-+      <script>
+--- versions/4.2.2/content/themes/casper/post.hbs
++++ versions/4.2.2/content/themes/casper/post.hbs
+@@ -69,11 +69,17 @@
+         {{content}}
+     </section>
+ 
+-    {{!--
+-    <section class="article-comments gh-canvas">
+-        If you want to embed comments, this is a good place to paste your code!
+-    </section>
+-    --}}
++    <div id="disqus_thread"></div>
++    <script>
 +
-+      (function() { // DON'T EDIT BELOW THIS LINE
-+      var d = document, s = d.createElement('script');
-+      s.src = 'https://karlstoney.disqus.com/embed.js';
-+      s.setAttribute('data-timestamp', +new Date());
-+      (d.head || d.body).appendChild(s);
-+      })();
-+      </script>
-+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-         </article>
++    (function() { // DON'T EDIT BELOW THIS LINE
++    var d = document, s = d.createElement('script');
++    s.src = 'https://karlstoney.disqus.com/embed.js';
++    s.setAttribute('data-timestamp', +new Date());
++    (d.head || d.body).appendChild(s);
++    })();
++    </script>
++    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+ </article>
+ 
+@@ -114,4 +120,4 @@
+     </div>
+ </aside>
+ 
+-{{/post}}
+\ No newline at end of file
++{{/post}}

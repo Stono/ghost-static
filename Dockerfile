@@ -1,19 +1,18 @@
-FROM centos:7
+FROM centos:8
 MAINTAINER Karl Stoney <me@karlstoney.com>
 
 # Get dependencies
-RUN yum -y -q install which curl wget gettext patch gcc-c++ make git-core bzip2 unzip gcc python-devel python-setuptools redhat-rpm-config && \
+RUN yum -y -q install which curl wget gettext patch gcc-c++ make git-core bzip2 unzip gcc python3-devel python3-setuptools redhat-rpm-config && \
     yum -y -q clean all
 
 # Install crcmod
-RUN easy_install -U pip && \
+RUN easy_install-3 -U pip && \
     pip install -U crcmod
 
 # Get nodejs repos
-RUN curl --silent --location https://rpm.nodesource.com/setup_12.x | bash -
+RUN curl --silent --location https://rpm.nodesource.com/setup_14.x | bash -
 
-# Install nodejs, max currently supported is 6.9.0
-RUN yum -y -q install nodejs-12.* && \
+RUN yum -y -q install nodejs-14.* && \
     yum -y -q clean all
 
 # Setup www-data user
@@ -56,7 +55,7 @@ RUN npm install -g ghost-cli@$GHOST_CLI_VERSION
 RUN chown -R www-data:www-data $GHOST_HOME
 ARG GHOST_VERSION
 RUN su -c 'ghost install local --no-setup --db sqlite3 --v$GHOST_VERSION' www-data
-
+RUN su -c 'npm install sqlite3 --save' www-data
 # Add static content generator
 ARG SITEMAP_GENERATOR_VERSION
 RUN npm install -g ghost-static-site-generator@$SITEMAP_GENERATOR_VERSION
