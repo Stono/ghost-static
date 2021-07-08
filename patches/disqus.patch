@@ -1,5 +1,5 @@
---- versions/4.2.2/content/themes/casper/post.hbs
-+++ versions/4.2.2/content/themes/casper/post.hbs
+--- versions/4.9.1/content/themes/casper/post.hbs
++++ versions/4.9.1/content/themes/casper/post.hbs
 @@ -69,11 +69,19 @@
          {{content}}
      </section>
