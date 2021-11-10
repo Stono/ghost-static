@@ -8,10 +8,12 @@ services:
     build: 
       context: .
       args:
-        GCLOUD_VERSION: 337.0.0
-        GHOST_VERSION: 4.9.1
-        GHOST_CLI_VERSION: 1.17.3
-        SITEMAP_GENERATOR_VERSION: 1.0.1 
+        GHOST_VERSION: 4.22.0
+        GHOST_CLI_VERSION: 1.18.0
+        SITEMAP_GENERATOR_VERSION: 1.0.1
+        NODEJS_VERSION: 16
+        GCLOUD_VERSION: 364
+        ARCH: arm
     restart: always
     environment:
       NODE_ENV: production
@@ -20,8 +22,6 @@ services:
       - ./data/content/data:/var/www/ghost/current/content/data
       - ./data/content/images:/var/www/ghost/current/content/images
       - ./data/content/settings:/var/www/ghost/current/content/settings
-      - ./bin:/usr/local/bin
-#      - ~/.config:/root/.config
       - ./data/static:/static
     ports:
       - 80:80

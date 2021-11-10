@@ -10,9 +10,10 @@ RUN easy_install-3 -U pip && \
     pip install -U crcmod
 
 # Get nodejs repos
-RUN curl --silent --location https://rpm.nodesource.com/setup_14.x | bash -
+ARG NODEJS_VERSION
+RUN curl --silent --location https://rpm.nodesource.com/setup_$NODEJS_VERSION.x | bash -
 
-RUN yum -y -q install nodejs-14.* && \
+RUN yum -y -q install nodejs-$NODEJS_VERSION.* && \
     yum -y -q clean all
 
 # Setup www-data user
@@ -30,16 +31,18 @@ EXPOSE 2368
 ENV GHOST_HOME /var/www/ghost
 
 # Install Gcloud utilities
+ARG GCLOUD_VERSION
+ARG ARCH
 ENV CLOUDSDK_INSTALL_DIR /usr/lib64/google-cloud-sdk
 ENV CLOUDSDK_PYTHON_SITEPACKAGES 1
-COPY gcloud.repo /etc/yum.repos.d/
 RUN mkdir -p /etc/gcloud/keys
-ARG GCLOUD_VERSION
-
-# Install packages
-RUN yum -y -q update && \
-    yum -y -q install google-cloud-sdk-$GCLOUD_VERSION && \
-    yum -y -q clean all
+RUN curl -s -f -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_VERSION.0.0-linux-${ARCH}.tar.gz && \
+    tar xzf google-cloud-sdk-*.tar.gz && \
+    mv google-cloud-sdk ${CLOUDSDK_INSTALL_DIR} && \
+    rm google-cloud-sdk-*.tar.gz && \
+    cd /usr/local/bin && \
+    ln -sf /usr/lib64/google-cloud-sdk/bin/gcloud . && \
+    ln -sf /usr/lib64/google-cloud-sdk/bin/gsutil .
 
 # Disable google cloud auto update... we should be pushing a new agent container
 RUN gcloud config set --installation component_manager/disable_update_check true && \
@@ -55,7 +58,12 @@ RUN npm install -g ghost-cli@$GHOST_CLI_VERSION
 RUN chown -R www-data:www-data $GHOST_HOME
 ARG GHOST_VERSION
 RUN su -c 'ghost install local --no-setup --db sqlite3 --v$GHOST_VERSION' www-data
+
+# Alias python
+RUN cd /usr/local/bin && \
+    ln -sf /usr/bin/python3 python
 RUN su -c 'npm install sqlite3 --save' www-data
+
 # Add static content generator
 ARG SITEMAP_GENERATOR_VERSION
 RUN npm install -g ghost-static-site-generator@$SITEMAP_GENERATOR_VERSION
@@ -64,7 +72,7 @@ RUN mkdir /static
 # Patch ghost
 RUN mkdir -p /usr/local/etc/ghost/patches
 COPY patches/ /usr/local/etc/ghost/patches/
-COPY bin/* /usr/local/bin/
+COPY bin/ /usr/local/bin/
 
 RUN /usr/local/bin/apply_patches.sh
 COPY data/config.json /var/www/ghost/current/config.production.json
